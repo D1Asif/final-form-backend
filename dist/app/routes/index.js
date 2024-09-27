@@ -4,38 +4,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var user_route_1 = require("../modules/user/user.route");
-var auth_route_1 = require("../modules/auth/auth.route");
-var service_route_1 = require("../modules/service/service.route");
-var slot_route_1 = require("../modules/slot/slot.route");
-var booking_route_1 = require("../modules/booking/booking.route");
-var mybookings_route_1 = require("../modules/myBookings/mybookings.route");
+var product_route_1 = require("../modules/products/product.route");
+var order_route_1 = require("../modules/orders/order.route");
 var router = express_1.default.Router();
 var moduleRoutes = [
     {
-        path: "/auth",
-        route: user_route_1.UserRoutes
+        path: "/products",
+        route: product_route_1.ProductRoutes
     },
     {
-        path: "/auth",
-        route: auth_route_1.AuthRoutes
-    },
-    {
-        path: "/services",
-        route: service_route_1.ServiceRoutes
-    },
-    {
-        path: "/slots",
-        route: slot_route_1.SlotRoutes
-    },
-    {
-        path: "/bookings",
-        route: booking_route_1.BookingRoutes
-    },
-    {
-        path: "/my-bookings",
-        route: mybookings_route_1.MyBookingsRoutes
-    },
+        path: "/orders",
+        route: order_route_1.OrderRoutes
+    }
 ];
 moduleRoutes.forEach(function (route) { return router.use(route.path, route.route); });
 exports.default = router;

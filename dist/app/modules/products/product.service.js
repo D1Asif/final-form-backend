@@ -35,48 +35,68 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = __importDefault(require("mongoose"));
-var config_1 = __importDefault(require("./app/config"));
-var app_1 = __importDefault(require("./app"));
-var server;
-function main() {
-    return __awaiter(this, void 0, void 0, function () {
-        var err_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, mongoose_1.default.connect(config_1.default.database_uri)];
-                case 1:
-                    _a.sent();
-                    server = app_1.default.listen(config_1.default.port, function () {
-                        console.log("App listening on port ".concat(config_1.default.port));
-                    });
-                    return [3 /*break*/, 3];
-                case 2:
-                    err_1 = _a.sent();
-                    console.log(err_1);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
+exports.ProductServices = void 0;
+var product_model_1 = require("./product.model");
+var createProductIntoDB = function (payload) { return __awaiter(void 0, void 0, void 0, function () {
+    var newProduct;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, product_model_1.Product.create(payload)];
+            case 1:
+                newProduct = _a.sent();
+                return [2 /*return*/, newProduct];
+        }
     });
-}
-main();
-process.on('unhandledRejection', function () {
-    console.log("👿 Unhandled rejection detected. Shutting down the server...");
-    if (server) {
-        server.close(function () {
-            process.exit(1);
-        });
-    }
-    process.exit();
-});
-process.on('uncaughtException', function () {
-    console.log("😠 Uncaught exception detected. Shutting down the server...");
-    process.exit(1);
-});
+}); };
+var getAllProductsFromDB = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var products;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, product_model_1.Product.find()];
+            case 1:
+                products = _a.sent();
+                return [2 /*return*/, products];
+        }
+    });
+}); };
+var getSingleProductFromDB = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+    var product;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, product_model_1.Product.findById(id)];
+            case 1:
+                product = _a.sent();
+                return [2 /*return*/, product];
+        }
+    });
+}); };
+var updateProductIntoDB = function (id, payload) { return __awaiter(void 0, void 0, void 0, function () {
+    var updatedProduct;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, product_model_1.Product.findByIdAndUpdate(id, payload, { new: true })];
+            case 1:
+                updatedProduct = _a.sent();
+                return [2 /*return*/, updatedProduct];
+        }
+    });
+}); };
+var deleteProductFromDB = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+    var deleteProduct;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, product_model_1.Product.findByIdAndDelete(id)];
+            case 1:
+                deleteProduct = _a.sent();
+                return [2 /*return*/, deleteProduct];
+        }
+    });
+}); };
+exports.ProductServices = {
+    createProductIntoDB: createProductIntoDB,
+    getAllProductsFromDB: getAllProductsFromDB,
+    getSingleProductFromDB: getSingleProductFromDB,
+    updateProductIntoDB: updateProductIntoDB,
+    deleteProductFromDB: deleteProductFromDB
+};

@@ -18,8 +18,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var AppError = /** @class */ (function (_super) {
     __extends(AppError, _super);
     function AppError(statusCode, message, stack) {
-        var _newTarget = this.constructor;
         if (stack === void 0) { stack = ''; }
+        var _newTarget = this.constructor;
         var _this = _super.call(this, message) || this;
         _this.statusCode = statusCode;
         Object.setPrototypeOf(_this, _newTarget.prototype);

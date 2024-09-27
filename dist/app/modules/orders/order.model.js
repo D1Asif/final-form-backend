@@ -1,11 +1,12 @@
-import { model, Schema } from "mongoose";
-import { TOrder } from "./order.interface";
-
-const orderSchema = new Schema<TOrder>({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Order = void 0;
+var mongoose_1 = require("mongoose");
+var orderSchema = new mongoose_1.Schema({
     customerName: {
         type: String,
         required: true,
-        trim: true,  // Trims whitespace
+        trim: true, // Trims whitespace
     },
     customerEmail: {
         type: String,
@@ -25,7 +26,7 @@ const orderSchema = new Schema<TOrder>({
     items: [
         {
             productId: {
-                type: Schema.Types.ObjectId, // Reference to a Product (can be linked to another model)
+                type: mongoose_1.Schema.Types.ObjectId, // Reference to a Product (can be linked to another model)
                 required: true,
                 ref: 'Product', // Assumes a Product model exists
             },
@@ -46,6 +47,4 @@ const orderSchema = new Schema<TOrder>({
         required: true,
     },
 }, { timestamps: true }); // Automatically adds `createdAt` and `updatedAt` fields
-
-
-export const Order = model<TOrder>('Order', orderSchema);
+exports.Order = (0, mongoose_1.model)('Order', orderSchema);

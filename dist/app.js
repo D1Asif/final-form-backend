@@ -7,8 +7,8 @@ var express_1 = __importDefault(require("express"));
 var cors_1 = __importDefault(require("cors"));
 var cookie_parser_1 = __importDefault(require("cookie-parser"));
 var routes_1 = __importDefault(require("./app/routes"));
-var notFound_1 = __importDefault(require("./app/middlewares/notFound"));
 var globalErrorHandler_1 = __importDefault(require("./app/middlewares/globalErrorHandler"));
+var notFound_1 = __importDefault(require("./app/middlewares/notFound"));
 var app = (0, express_1.default)();
 // parser
 app.use(express_1.default.json());
@@ -19,7 +19,7 @@ app.use("/test", function (req, res) {
     res.send("test route");
 });
 app.get("/", function (req, res) {
-    res.send("Welcome to Car Washing System API!");
+    res.send("Welcome to Final Form API!");
 });
 app.use(globalErrorHandler_1.default);
 app.use(notFound_1.default);

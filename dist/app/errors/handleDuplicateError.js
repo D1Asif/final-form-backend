@@ -7,7 +7,7 @@ var handleDuplicateError = function (err) {
     var errorSources = [
         {
             path: key,
-            message: value + " already exists"
+            message: "".concat(value, " already exists")
         }
     ];
     return {
