@@ -35,17 +35,65 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderServices = void 0;
+var mongoose_1 = __importDefault(require("mongoose"));
 var order_model_1 = require("./order.model");
+var product_model_1 = require("../products/product.model");
+var AppError_1 = __importDefault(require("../../errors/AppError"));
+var http_status_1 = __importDefault(require("http-status"));
 var createOrderIntoDB = function (payload) { return __awaiter(void 0, void 0, void 0, function () {
-    var newOrder;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, order_model_1.Order.create(payload)];
+    var session, newOrder, _i, _a, item, product, err_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0: return [4 /*yield*/, mongoose_1.default.startSession()];
             case 1:
-                newOrder = _a.sent();
+                session = _b.sent();
+                session.startTransaction();
+                _b.label = 2;
+            case 2:
+                _b.trys.push([2, 10, , 12]);
+                return [4 /*yield*/, order_model_1.Order.create([payload], { session: session })];
+            case 3:
+                newOrder = _b.sent();
+                _i = 0, _a = payload.items;
+                _b.label = 4;
+            case 4:
+                if (!(_i < _a.length)) return [3 /*break*/, 8];
+                item = _a[_i];
+                return [4 /*yield*/, product_model_1.Product.findById(item.productId).session(session)];
+            case 5:
+                product = _b.sent();
+                if (!product) {
+                    throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Product with ID: ".concat(item.productId, " does not exist"));
+                }
+                if (product.stock < item.quantity) {
+                    throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Product with ID: ".concat(item.productId, " does not have sufficient stock"));
+                }
+                product.stock -= item.quantity;
+                return [4 /*yield*/, product.save({ session: session })];
+            case 6:
+                _b.sent();
+                _b.label = 7;
+            case 7:
+                _i++;
+                return [3 /*break*/, 4];
+            case 8: return [4 /*yield*/, session.commitTransaction()];
+            case 9:
+                _b.sent();
+                session.endSession();
                 return [2 /*return*/, newOrder];
+            case 10:
+                err_1 = _b.sent();
+                return [4 /*yield*/, session.abortTransaction()];
+            case 11:
+                _b.sent();
+                session.endSession();
+                throw err_1;
+            case 12: return [2 /*return*/];
         }
     });
 }); };

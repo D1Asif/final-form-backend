@@ -32,7 +32,7 @@ var productSchema = new mongoose_1.Schema({
     },
     tags: {
         type: [String],
-        required: false,
+        required: true,
         default: []
     }
 });

@@ -65,6 +65,15 @@ var globalErrorHandler = function (err, req, res, next) {
             }
         ];
     }
+    else if (err instanceof Error) {
+        message = err.message;
+        errorSources = [
+            {
+                path: '',
+                message: err.message
+            }
+        ];
+    }
     res.status(statusCode).json({
         success: false,
         message: message,

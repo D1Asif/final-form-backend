@@ -31,7 +31,7 @@ const productSchema = new Schema<TProduct>({
     },
     tags: {
         type: [String],
-        required: false,
+        required: true,
         default: []
     }
 });
