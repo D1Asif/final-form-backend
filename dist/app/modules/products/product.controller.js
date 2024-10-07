@@ -66,7 +66,7 @@ var getAllProducts = (0, catchAsync_1.default)(function (req, res) { return __aw
     var result;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, product_service_1.ProductServices.getAllProductsFromDB()];
+            case 0: return [4 /*yield*/, product_service_1.ProductServices.getAllProductsFromDB(req.query)];
             case 1:
                 result = _a.sent();
                 (0, sendResponse_1.default)(res, {

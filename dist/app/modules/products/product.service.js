@@ -35,8 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductServices = void 0;
+var QueryBuilder_1 = __importDefault(require("../../builder/QueryBuilder"));
 var product_model_1 = require("./product.model");
 var createProductIntoDB = function (payload) { return __awaiter(void 0, void 0, void 0, function () {
     var newProduct;
@@ -49,11 +53,18 @@ var createProductIntoDB = function (payload) { return __awaiter(void 0, void 0, 
         }
     });
 }); };
-var getAllProductsFromDB = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var products;
+var getAllProductsFromDB = function (query) { return __awaiter(void 0, void 0, void 0, function () {
+    var productQuery, products;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, product_model_1.Product.find()];
+            case 0:
+                productQuery = new QueryBuilder_1.default(product_model_1.Product.find(), query)
+                    .search(["name", "description"])
+                    .filter()
+                    .sort()
+                    .paginate()
+                    .fields();
+                return [4 /*yield*/, productQuery.modelQuery];
             case 1:
                 products = _a.sent();
                 return [2 /*return*/, products];
