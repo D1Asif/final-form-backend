@@ -11,4 +11,5 @@ export type TOrder = {
     }[];
     paymentMethod: 'Cash on Delivery' | 'Online Payment';
     totalPrice: number;
+    shippingCost: number;
 }

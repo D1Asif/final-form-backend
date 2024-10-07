@@ -45,6 +45,10 @@ const orderSchema = new Schema<TOrder>({
         type: Number,
         required: true,
     },
+    shippingCost: {
+        type: Number,
+        required: true,
+    },
 }, { timestamps: true }); // Automatically adds `createdAt` and `updatedAt` fields
 
 

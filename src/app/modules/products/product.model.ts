@@ -29,6 +29,11 @@ const productSchema = new Schema<TProduct>({
         required: true,
         min: 0, // Ensures stock is a non-negative number
     },
+    tags: {
+        type: [String],
+        required: false,
+        default: []
+    }
 });
 
 export const Product = model<TProduct>("Product", productSchema)

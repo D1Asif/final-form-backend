@@ -22,6 +22,7 @@ const createOrderValidationSchema = z.object({
             errorMap: () => ({ message: "Invalid payment method" })
         }), // Enum for payment methods
         totalPrice: z.number().min(0, "Total price must be a positive value"),
+        shippingCost: z.number().min(0, "Shipping cost must be a positive value"),
     })
 });
 
