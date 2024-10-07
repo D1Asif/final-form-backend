@@ -46,5 +46,9 @@ var orderSchema = new mongoose_1.Schema({
         type: Number,
         required: true,
     },
+    shippingCost: {
+        type: Number,
+        required: true,
+    },
 }, { timestamps: true }); // Automatically adds `createdAt` and `updatedAt` fields
 exports.Order = (0, mongoose_1.model)('Order', orderSchema);

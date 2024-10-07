@@ -22,6 +22,7 @@ var createOrderValidationSchema = zod_1.z.object({
             errorMap: function () { return ({ message: "Invalid payment method" }); }
         }), // Enum for payment methods
         totalPrice: zod_1.z.number().min(0, "Total price must be a positive value"),
+        shippingCost: zod_1.z.number().min(0, "Shipping cost must be a positive value"),
     })
 });
 exports.OrderValidations = {

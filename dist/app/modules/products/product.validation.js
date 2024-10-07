@@ -10,6 +10,7 @@ var createProductValidationSchema = zod_1.z.object({
         images: zod_1.z.array(zod_1.z.string().url("Each image must be a valid URL")), // Array of valid URLs
         category: zod_1.z.string().min(1, "Category is required"), // Non-empty string
         stock: zod_1.z.number().int().nonnegative("Stock must be a non-negative integer"),
+        tags: zod_1.z.array(zod_1.z.string())
     })
 });
 var updateProductValidationSchema = zod_1.z.object({
@@ -20,6 +21,7 @@ var updateProductValidationSchema = zod_1.z.object({
         images: zod_1.z.array(zod_1.z.string().url("Each image must be a valid URL")).optional(), // Array of valid URLs
         category: zod_1.z.string().min(1, "Category is required").optional(), // Non-empty string
         stock: zod_1.z.number().int().nonnegative("Stock must be a non-negative integer").optional(),
+        tags: zod_1.z.array(zod_1.z.string()).optional()
     })
 });
 exports.ProductValidations = {

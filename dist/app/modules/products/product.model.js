@@ -30,5 +30,10 @@ var productSchema = new mongoose_1.Schema({
         required: true,
         min: 0, // Ensures stock is a non-negative number
     },
+    tags: {
+        type: [String],
+        required: false,
+        default: []
+    }
 });
 exports.Product = (0, mongoose_1.model)("Product", productSchema);
