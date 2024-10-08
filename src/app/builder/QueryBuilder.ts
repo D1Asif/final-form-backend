@@ -39,6 +39,14 @@ class QueryBuilder<T> {
             this.modelQuery = this.modelQuery.find({tags: {$all: tags}} as FilterQuery<T>)
         }
 
+        if (this.query?.minPrice) {
+            this.modelQuery = this.modelQuery.find({price: {$gte: this.query.minPrice}} as FilterQuery<T>)
+        }
+
+        if (this.query?.maxPrice) {
+            this.modelQuery = this.modelQuery.find({price: {$lte: this.query.maxPrice}} as FilterQuery<T>)
+        }
+
         return this;
     }
 

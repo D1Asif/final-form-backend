@@ -24,7 +24,7 @@ var QueryBuilder = /** @class */ (function () {
         return this;
     };
     QueryBuilder.prototype.filter = function () {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e, _f;
         var categories = (_b = (_a = this === null || this === void 0 ? void 0 : this.query) === null || _a === void 0 ? void 0 : _a.category) === null || _b === void 0 ? void 0 : _b.split(",");
         var tags = (_d = (_c = this === null || this === void 0 ? void 0 : this.query) === null || _c === void 0 ? void 0 : _c.tags) === null || _d === void 0 ? void 0 : _d.split(",");
         if (categories === null || categories === void 0 ? void 0 : categories.length) {
@@ -32,6 +32,12 @@ var QueryBuilder = /** @class */ (function () {
         }
         if (tags === null || tags === void 0 ? void 0 : tags.length) {
             this.modelQuery = this.modelQuery.find({ tags: { $all: tags } });
+        }
+        if ((_e = this.query) === null || _e === void 0 ? void 0 : _e.minPrice) {
+            this.modelQuery = this.modelQuery.find({ price: { $gte: this.query.minPrice } });
+        }
+        if ((_f = this.query) === null || _f === void 0 ? void 0 : _f.maxPrice) {
+            this.modelQuery = this.modelQuery.find({ price: { $lte: this.query.maxPrice } });
         }
         return this;
     };
