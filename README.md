@@ -8,3 +8,9 @@ TypeScript, Express, MongoDB
 
 ## Endpoints:
 Visit Postman API documentation: [FinalForm API Postman Docs](https://documenter.getpostman.com/view/29497866/2sAXqy3zZZ)
+
+## How to run
+To run locally follow the following steps:
+1. Clone the repo in your machine.
+2. Go to the root directory and run `npm install` to install the dependencies.
+3. Run `npm run start:dev` to start the server.
